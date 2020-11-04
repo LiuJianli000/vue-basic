@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <p>Using mustaches: {{message}}</p>
+    <p>Using v-html directive: <span v-html="message"></span></p>
+  </div>
+  
+  <div id="app-2">
+    <span :title="message">
+      鼠标悬停几秒钟查看此处动态绑定的提示信息！
+    </span>
+  </div>
+
+  <div id="app-3">
+    <p v-if="seen">现在你看到我了</p>
+  </div>
+
+  <div id="app-4">
+    <ol type="I">
+      <li v-for="todo in todos">
+        {{ todo.text }}
+      </li>
+    </ol>
+  </div> 
+
+  <div id="app-5">
+    <p>{{ message }}</p>
+    <button @click="reverseMessage">反转消息</button>
+  </div>
+
+  <div id="app-6">
+    <p>{{ message }}</p>
+    <input v-model="message">
+  </div>
+
+  <div id="app-7">
+    <ol>
+      <todo-item
+        v-for="item in groceryList"
+        :todo="item"
+        :key="item.id"
+        :key1="item.id"
+      ></todo-item>
+    </ol>
+  </div>
+
+  <div id="app-8">
+    <p>{{ foo }}</p>
+    <button @click="() => { foo = 'baz' }">change</button>
+  </div>
+
+  <div id="app-9">
+    <div v-bind:disabled="false">! disabled</div>
+    <div>{{ 1 + 2 }}</div>
+    <a :id="id" :href="url">baidu.com</a><br/>
+    <a :id="id" :[href]="url">baidu.com</a>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src='./hello.js'></script>
+</html>

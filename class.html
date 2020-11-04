@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    {{ message }}
+
+    <div
+      class="static"
+      v-bind:class="{ active: isActive, 'text-danger': hasError }"
+    >
+      动态切换 class
+    </div>
+
+    <div
+      :class="classObject"
+    >
+      绑定对象
+    </div>
+
+    <div :class="[activeClass, errorClass]">数组语法</div>
+
+    <div :style="{ height: `300px`, width: `300px`, border: `1px solid red` }"></div>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+      isActive: true,
+      hasError: false,
+      classObject: {
+        active: true,
+        'text-anger': false
+      },
+      activeClass: 'active',
+      errorClass: 'text-danger'
+    },
+    // computed: {
+    //   classObject: function() {
+    //     return {
+    //       active: this.isActive && !this.hasError,
+    //       text-danger: this.hasError
+    //     }
+    //   }
+    // }
+  })
+</script>
+</html>

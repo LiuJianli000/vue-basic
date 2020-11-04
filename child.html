@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <my-component></my-component>
+    <my-component2 ref="value"></my-component2>
+    <button @click="handleClick">click</button>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  // 全局注册组件
+  Vue.component('my-component2', {
+    data: function() {
+      return {
+        mc2: '2222'
+      }
+    },
+    template: `<div>{{ this.$root.msg }}</div>`
+    // template: `<div>{{ this.$parent.msg }}</div>`
+  })
+  
+  // 局部注册组件
+  const mycomponent = {
+    template: `<div>{{ this.$root.msg }}</div>`
+    // template: `<div>{{ this.$parent.msg }}</div>`
+  }
+  
+  const app = new Vue({
+    el: '#app',
+    data: {
+      msg: 'liujianli'
+    },
+    components: {
+      'my-component': mycomponent,
+    },
+    methods: {
+      handleClick: function() {
+        console.log(this.$refs.value.mc2)
+      }
+    }
+  })
+</script>
+</html>

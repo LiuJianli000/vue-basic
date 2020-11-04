@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <template v-if="loginType === 'username'">
+      <label>Username</label>
+      <input placeholder="Enter your username" key="username-input">
+    </template>
+    <template v-else>
+      <label>Email</label>
+      <input placeholder="Enter your email address" key="email-input">
+    </template>
+    <button @click="toggle">toggle login type</button>
+
+    <div style="display: none;">display: none</div>
+    <div v-show='false'>v-show: hello</div>
+
+    <ol>
+      <li
+        v-for="item in animals"
+      >
+        {{ item.name }}
+      </li>
+    </ol>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      loginType: 'username',
+      animals: [
+        {
+          id: 1,
+          name: 'dog'
+        },
+        {
+          id: 2,
+          name: 'cat'
+        },
+        {
+          id: 3,
+          name: 'fish'
+        }
+      ]
+    },
+    methods: {
+      toggle: function() {
+        if (this.loginType === 'username') {
+          this.loginType = 'email'
+        } else {
+          this.loginType = 'username'
+        }
+      }
+    }
+  })
+
+  console.log(app.loginType)
+  console.log(app.toggle)
+</script>
+</html>

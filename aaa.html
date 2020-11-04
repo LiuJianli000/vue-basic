@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <child ref="child" @say-hi="handleSayHi"></child>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  Vue.component('child', {
+    template: `<button @click="$emit('say-hi', 'hello world')">button</button>`,
+    methods: {
+      sing: function() {
+        console.log("I'm singing")
+      }
+    }
+  })
+  
+  const app = new Vue({
+    el: '#app',
+    data: {
+      valueChild: true
+    },
+    methods: {
+      handleSayHi: function(msg) {
+        console.log(msg)
+      }
+    }
+  })
+</script>
+</html>

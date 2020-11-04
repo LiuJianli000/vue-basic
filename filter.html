@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    {{ message }}
+    <li v-for="n in evenNumbers">
+      {{ n }}
+    </li>
+
+    <ul>
+      <li v-for="(value, name, index) in object">
+        {{ name }}: {{ value }}
+      </li>
+    </ul>
+
+    <li v-for="n in evenNumbers2(numbers)">
+      {{ n }}
+    </li>
+
+    <li v-for="member in members" v-if="member.name == 'liu'">
+      {{ member.name }}
+    </li>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+      numbers: [1, 2, 3, 4, 5],
+      object: {
+        title: 'How to do lists in Vue',
+        author: 'Jane Doe',
+        publishedAt: '2016-04-10'
+      },
+      members: [
+        {
+          name: 'liu',
+          age: 23
+        },
+        {
+          name: 'dai',
+          age: 22
+        }
+      ]
+    },
+    computed: {
+      evenNumbers: function() {
+        return this.numbers.filter(number => number % 2 === 0)
+      }
+    },
+    methods: {
+      evenNumbers2: function(numbers) {
+        return numbers.filter(number => number % 2 === 0)
+      }
+    }
+  })
+</script>
+</html>

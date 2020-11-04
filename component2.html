@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+
+    <!-- <blog-post title="hello world"></blog-post>
+    <blog-post title="hello sky"></blog-post> -->
+
+    <div :style="{ fontSize: postFontSize + 'em' }">
+      <blog-post
+        v-for="post in posts"
+        v-bind:key="post.id"
+        v-bind:post="post"
+        @set="setFontSize"
+      ></blog-post>
+    </div>
+
+    <ul>
+      <my-component
+        v-for="list in lists"
+        :key="list.id"
+        :item="list"
+        @sayhi="handleSayHi"
+      ></my-components>
+    </ul>
+
+    <input
+      :value="searchText"
+      @input="searchText=$event.target.value"
+    >
+    <span>{{ searchText }}</span>
+
+    <custom-input></custom-input>
+
+    <custom-input v-model="searchText"></custom-input>
+
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  Vue.component('button-counter', {
+    data: function() {
+      return {
+        count: 0
+      }
+    },
+    template: `
+      <button @click="count++">
+        You clicked me {{ count }} times.
+      </button>
+    `
+  })
+
+  Vue.component('blog-post', {
+    data: function() {
+      return {
+
+      }
+    },
+    props: ['post'],
+    template: `
+      <div class="blog-post">
+        <h3>{{ post.title }}</h3>
+        <button @click="$emit('set', 2, 'hello00')">
+          Enlarge text
+        </button>
+        <div v-html="post.content"></div>
+      </div>
+    `
+  })
+
+  Vue.component('my-component', {
+    data: function() {
+      return {
+        
+      }
+    },
+    props: ['item'],
+    template: `
+      <div class="my-component">
+        <h3>{{ item.title }}</h3>
+        <button @click="$emit('sayhi', 'happy everyday')">sayHi</button>
+      </div>
+    `
+  })
+
+  Vue.component('custom-input', {
+    props: ['value'],
+    template: `
+      <input :value="value" @input="$emit('input', $event.target.value)">
+    `
+  })
+  
+  const app = new Vue({
+    el: '#app',
+    data: {
+      posts: [
+        { id: 1, title: 'My journey with Vue', content: 'hello' },
+        { id: 2, title: 'Blogging with Vue', content: 'hello2' },
+        { id: 3, title: 'Why Vue is so fun', content: 'hello3' }
+      ],
+      postFontSize: 1,
+      lists: [
+        {
+          id: 1,
+          title: 'learn vue',
+        },
+        {
+          id: 2,
+          title: 'learn react'
+        }
+      ],
+      searchText: ''
+    },
+    methods: {
+      setFontSize: function(size, hello) {
+        console.log(size, hello)
+        this.postFontSize = size
+      },
+      handleSayHi: function(msg) {
+        console.log(msg)
+      }
+    }
+  })
+</script>
+</html>

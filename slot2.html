@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <my-component>
+      <template #header="{ user }">{{ user.firstName }}</template>
+    </my-component>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  Vue.component('my-component', {
+    data: function() {
+      return {
+        user: {
+          firstName: 'liu',
+          lastName: 'jianli'
+        }
+      }
+    },
+    template: `
+      <div>
+        <header>
+          <slot name="header" :user="user">{{ user.lastName }}</slot>
+        </header>
+      </div>
+    `
+  })
+  
+  const app = new Vue({
+    el: '#app',
+    data: {
+      msg: 'hello world'
+    },
+  })
+</script>
+</html>
